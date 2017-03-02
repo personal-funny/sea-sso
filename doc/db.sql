@@ -1,0 +1,12 @@
+CREATE TABLE `user` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `login_name` VARCHAR(32) NOT NULL,
+  `passwd` VARCHAR(128) NOT NULL,
+  `status` INT(2) NOT NULL COMMENT '0:normal;1:suspend;2:deleted',
+  PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_general_ci
+AUTO_INCREMENT=0
+ROW_FORMAT=COMPACT
+;
