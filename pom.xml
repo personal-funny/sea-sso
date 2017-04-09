@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sea-sso</artifactId>
     <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
 
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -13,8 +14,10 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <org.mybatis-version>3.2.8</org.mybatis-version>
+        <org.mybatis-spring-version>1.2.2</org.mybatis-spring-version>
 
-        <start-class>com.see.web.sso.startclass.Application</start-class>
+        <start-class>com.sea.web.sso.startclass.Application</start-class>
         <spring.boot.version>1.4.1.RELEASE</spring.boot.version>
     </properties>
 
@@ -50,12 +53,40 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
 
         <!-- google -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>19.0</version>
+        </dependency>
+
+        <!-- databases -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <!-- 版本号可以不用指定，Spring Boot会选用合适的版本 -->
+        </dependency>
+        <!-- 持久层依赖 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${org.mybatis-spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${org.mybatis-version}</version>
         </dependency>
     </dependencies>
 

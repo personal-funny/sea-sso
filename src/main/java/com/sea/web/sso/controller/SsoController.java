@@ -1,8 +1,9 @@
-package com.see.web.sso.controller;
+package com.sea.web.sso.controller;
 
-import com.see.web.sso.credential.Authentication;
-import com.see.web.sso.modal.User;
+import com.sea.web.sso.credential.Authentication;
+import com.sea.web.sso.modal.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class SsoController {
 
+  @Autowired
+  private Authentication authentication;
+
   @RequestMapping(value = "/hello", method = RequestMethod.GET)
   public String hello(HttpServletRequest request) {
     User user = (User) request.getSession().getAttribute("user");
@@ -29,7 +33,7 @@ public class SsoController {
   @RequestMapping(value="/login")
   public void login(HttpServletRequest request, HttpServletResponse response) {
     try {
-      Authentication.authin(request, response);
+      authentication.authin(request, response);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -38,7 +42,7 @@ public class SsoController {
   @RequestMapping(value = "/logout")
   public void logout(HttpServletRequest request, HttpServletResponse response) {
     try {
-      Authentication.authout(request, response);
+      authentication.authout(request, response);
     } catch (IOException e) {
       e.printStackTrace();
     }

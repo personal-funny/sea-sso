@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sea.web.sso.dao.UserDAO">
+    <resultMap id="SeaUserMap" type="SeaUser">
+        <result column="id" property="id"/>
+        <result column="login_name" property="loginName"/>
+        <result column="passwd" property="passwd"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <!-- create a user -->
+    <insert id="create" parameterType="SeaUser">
+        INSERT INTO user (
+            login_name,
+            passwd,
+            status
+        ) VALUES (
+            #{loginName},
+            #{passwd},
+            #{status}
+        )
+        <selectKey keyProperty="id" resultType="Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <!-- delete a user from database (physical deleted) -->
+    <delete id="delete" parameterType="SeaUser">
+        DELETE FROM user WEHRE id = #{id}
+    </delete>
+
+    <!-- update user's info -->
+    <update id="update" parameterType="SeaUser">
+        UPDATE
+            user
+        SET
+            passwd = #{passwd},
+            status = #{status}
+        WHERE
+          id = #{id}
+    </update>
+
+    <!-- select a user info by user's id -->
+    <select id="get" parameterType="java.lang.Long" resultMap="SeaUserMap">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="check" parameterType="SeaUser" resultMap="SeaUserMap">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            login_name=#{loginName} AND passwd=#{passwd}
+    </select>
+</mapper>

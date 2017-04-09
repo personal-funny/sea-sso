@@ -1,7 +1,10 @@
-package com.see.web.sso.credential;
+package com.sea.web.sso.credential;
 
-import com.see.web.sso.modal.LoginResponse;
-import com.see.web.sso.modal.User;
+import com.sea.web.sso.manager.UserManager;
+import com.sea.web.sso.modal.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,15 +19,16 @@ import javax.servlet.http.HttpSession;
  *
  * Created by chris on 17-3-2.
  */
+@Component
 public class Authentication {
 
-  public static void authin(HttpServletRequest request, HttpServletResponse response)
+  @Autowired
+  private UserManager userManager;
+
+  public void authin(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
     Credential credential = SeaCredential.resolveCredential(request);
-    User user = new User();
-    user.setLoginName("chris");
-    user.setPasswd("123456");
-    // TODO
+    User user = userManager.check(credential.getUsername(), credential.getPassword());
     if (user.getLoginName().equals(credential.getUsername())
         && user.getPasswd().equals(credential.getPassword())) {
       HttpSession session = request.getSession();
@@ -43,7 +47,7 @@ public class Authentication {
     }
   }
 
-  public static void authout(HttpServletRequest request, HttpServletResponse response)
+  public void authout(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
     HttpSession session = request.getSession(false);
     if (session != null) {

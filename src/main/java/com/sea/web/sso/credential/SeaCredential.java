@@ -1,4 +1,4 @@
-package com.see.web.sso.credential;
+package com.sea.web.sso.credential;
 
 import org.springframework.util.StringUtils;
 

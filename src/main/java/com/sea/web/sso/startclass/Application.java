@@ -1,19 +1,24 @@
-package com.see.web.sso.startclass;
+package com.sea.web.sso.startclass;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * Start Class.
  *
  * Created by chris on 17-2-25.
  */
-@ComponentScan("com.see.web.sso")
+@Configuration
+@ComponentScan("com.sea.web.sso")
 @EnableAutoConfiguration
+@ImportResource("classpath:root-context.xml")
 public class Application {
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Application.class, args);
+    System.out.println("Vip business started ... ... OK");
   }
 }

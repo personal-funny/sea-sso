@@ -1,4 +1,4 @@
-package com.see.web.sso.modal;
+package com.sea.web.sso.modal;
 
 import java.io.Serializable;
 
