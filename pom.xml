@@ -20,6 +20,8 @@
 
         <start-class>com.sea.web.sso.startclass.Application</start-class>
         <spring.boot.version>1.4.1.RELEASE</spring.boot.version>
+
+        <junit.version>4.11</junit.version>
     </properties>
 
     <dependencies>
@@ -94,6 +96,13 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>${mariadb-java-client.version}</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- unit test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
         </dependency>
     </dependencies>
 
