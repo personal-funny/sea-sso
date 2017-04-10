@@ -2,6 +2,7 @@ package com.sea.web.sso.dao;
 
 import com.sea.web.sso.modal.User;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -48,5 +49,5 @@ public interface UserDAO {
    * @param passwd    password
    * @return current user
    */
-  public User check(String loginName, String passwd);
+  public User check(@Param("loginName") String loginName, @Param("passwd") String passwd);
 }
