@@ -10,24 +10,20 @@
     <context:property-placeholder ignore-unresolvable="true"
                                   location="classpath:/spring/placeholder/datasource.properties"/>
 
-    <bean id="hikariConfig.uac" class="com.zaxxer.hikari.HikariConfig">
-        <property name="poolName" value="springHikariCP"/>
-        <property name="connectionTestQuery" value="SELECT 1"/>
-        <property name="dataSourceClassName" value="${DBDriverClass}"/>
-        <property name="maximumPoolSize" value="${DBMaxPoolSize}"/>
-        <property name="idleTimeout" value="${DBMaxIdleTime}"/>
-
-        <property name="dataSourceProperties">
-            <props>
-                <prop key="url">${DBJdbcUrl_uac}</prop>
-                <prop key="user">${DBUser}</prop>
-                <prop key="password">${DBPassword}</prop>
-            </props>
-        </property>
-    </bean>
-
-    <!-- HikariCP configuration -->
     <bean id="dataSource.uac" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-        <constructor-arg ref="hikariConfig.uac"/>
+        <constructor-arg>
+            <bean class="com.zaxxer.hikari.HikariConfig">
+                <property name="driverClassName" value="${DBDriverClass}"/>
+                <property name="jdbcUrl" value="${DBJdbcUrl_uac}"/>
+                <property name="username" value="${DBUser}"/>
+                <property name="password" value="${DBPassword}"/>
+                <property name="connectionTestQuery" value="${DBConnectionTestQuery}"/>
+                <property name="connectionTimeout" value="${DBconnectionTimeout}"/>
+                <property name="idleTimeout" value="${DBMaxIdleTime}"/>
+                <property name="maxLifetime" value="${DBMaxLifetime}"/>
+                <property name="maximumPoolSize" value="${DBMinPoolSize}"/>
+                <property name="minimumIdle" value="${DBMinIdleTime}"/>
+            </bean>
+        </constructor-arg>
     </bean>
 </beans>

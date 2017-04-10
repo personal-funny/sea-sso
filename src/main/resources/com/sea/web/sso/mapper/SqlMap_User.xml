@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sea.web.sso.dao.UserDAO">
-    <resultMap id="SeaUserMap" type="SeaUser">
+    <resultMap id="UserMap" type="User">
         <result column="id" property="id"/>
         <result column="login_name" property="loginName"/>
         <result column="passwd" property="passwd"/>
@@ -10,7 +10,7 @@
     </resultMap>
 
     <!-- create a user -->
-    <insert id="create" parameterType="SeaUser">
+    <insert id="create" parameterType="User">
         INSERT INTO user (
             login_name,
             passwd,
@@ -26,12 +26,12 @@
     </insert>
 
     <!-- delete a user from database (physical deleted) -->
-    <delete id="delete" parameterType="SeaUser">
+    <delete id="delete" parameterType="User">
         DELETE FROM user WEHRE id = #{id}
     </delete>
 
     <!-- update user's info -->
-    <update id="update" parameterType="SeaUser">
+    <update id="update" parameterType="User">
         UPDATE
             user
         SET
@@ -42,7 +42,7 @@
     </update>
 
     <!-- select a user info by user's id -->
-    <select id="get" parameterType="java.lang.Long" resultMap="SeaUserMap">
+    <select id="get" parameterType="java.lang.Long" resultMap="UserMap">
         SELECT
             *
         FROM
@@ -51,7 +51,7 @@
             id = #{id}
     </select>
 
-    <select id="check" parameterType="SeaUser" resultMap="SeaUserMap">
+    <select id="check" parameterType="User" resultMap="UserMap">
         SELECT
             *
         FROM
